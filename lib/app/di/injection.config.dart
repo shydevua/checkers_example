@@ -22,14 +22,14 @@ import 'package:checkers_app/features/game/presentation/bloc/game/ai_move_delay.
     as _i779;
 import 'package:checkers_app/features/game/presentation/bloc/game/game_bloc.dart'
     as _i689;
+import 'package:checkers_app/features/shared/game_results/game_result_recorder.dart'
+    as _i583;
 import 'package:checkers_app/features/statistics/data/datasources/local/stats_local_data_source.dart'
     as _i414;
 import 'package:checkers_app/features/statistics/domain/statistics_domain.dart'
     as _i314;
 import 'package:checkers_app/features/statistics/presentation/bloc/stats/stats_bloc.dart'
     as _i299;
-import 'package:checkers_app/features/shared/game_results/game_result_recorder.dart'
-    as _i680;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -80,11 +80,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i314.ResetGameStats>(
       () => statisticsModule.resetGameStats(gh<_i314.StatsRepository>()),
     );
-    gh.lazySingleton<_i680.GameResultRecorder>(
+    gh.lazySingleton<_i583.GameResultRecorder>(
       () => statisticsModule.gameResultRecorder(gh<_i314.StatsRepository>()),
     );
     gh.lazySingleton<_i89.SaveGameResult>(
-      () => gameModule.saveGameResult(gh<_i680.GameResultRecorder>()),
+      () => gameModule.saveGameResult(gh<_i583.GameResultRecorder>()),
     );
     gh.factory<_i299.StatsBloc>(
       () => statisticsModule.statsBloc(

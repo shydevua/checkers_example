@@ -675,7 +675,7 @@ Future<void> main() async {
 
 - Environments: injectable `@dev` / `@prod` (and `@test` if needed).
 - Scopes: lazy singletons for repositories, data sources, use cases; factories for blocs.
-- After changing annotations or constructors, run in the affected package: `dart run build_runner build -d`.
+- After changing annotations or constructors, run in the affected package: `dart run build_runner build`.
 - Never edit generated files (`*.g.dart`, `*.config.dart`, `*.module.dart`).
 
 ## 12. Testing
