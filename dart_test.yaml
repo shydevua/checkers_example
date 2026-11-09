@@ -1,0 +1,7 @@
+tags:
+  # Pixel comparisons: rendering differs between platforms, so CI runs them
+  # on macOS only (`flutter test --tags golden`).
+  golden: {}
+  # Runs on a device or simulator: flutter test test/integration -d <device>;
+  # skipped on the host.
+  integration: {}
