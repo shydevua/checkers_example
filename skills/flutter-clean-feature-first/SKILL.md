@@ -79,8 +79,8 @@ Inside each feature package, public API goes through one barrel `lib/<package>.d
 
 <feature>_presentation/lib/src/
   bloc/<screen>/   # <screen>_bloc.dart, <screen>_event.dart, <screen>_state.dart (separate libraries, no `part`)
-  pages/           # one page widget per route
-  widgets/         # feature-private widgets
+  pages/           # one file per route: the page widget only (and its State)
+    widgets/       # every other widget of the feature: one public widget class per file
   routes/          # <feature>_routes.dart: List<RouteBase>
   di/              # @module registering use cases + @InjectableInit.microPackage()
 ```
@@ -477,6 +477,18 @@ Presentation rules:
 - Navigation and snackbars: `BlocListener` in the page. Rendering: see section 10 for how to scope rebuilds.
 - Pick a concurrency transformer for every event handler (`droppable`, `restartable`, `sequential`).
 - Cubit is fine for a simple screen with no event semantics; the same rules apply.
+- **A page file holds only the page.** `pages/<name>_page.dart` contains the page widget (and its `State`
+  if it is stateful) — nothing else. Every other widget lives in `pages/widgets/`, **one widget per file**,
+  as a public class named after its role (`GameStatusLine`, `StatsTable`, `UndoMoveButton`), file name in
+  snake_case (`game_status_line.dart`). No private `_Widget` classes in a page file.
+  - Helpers used by a single widget (a private enum, a formatting function) stay private in that widget's file.
+  - Feature-wide helpers that are not widgets (painters, exception -> text functions) also go to
+    `pages/widgets/`, one concern per file.
+  - Widgets shared by several features go to `core/` (design system), never to another feature.
+  - Every new widget gets a `const` constructor with `super.key`.
+- **Every page builds on the shared layout** `AppPageLayout` from core (`Scaffold` + `AppBar` with title and
+  actions + `SafeArea`, optional `maxContentWidth` to centre and cap the body). Feature code never builds its own
+  `Scaffold` / `SafeArea`; a new kind of frame is added to core, not to a feature.
 
 ## 10. UI performance (smooth on low-end devices)
 
@@ -489,6 +501,7 @@ Judge performance only in **profile mode on a real device** (`flutter run --prof
 - Use `BlocSelector` / `context.select` to subscribe to one field; use `buildWhen` / `listenWhen` on builders and listeners.
 - States are `Equatable`, so equal states do not rebuild. Do not emit a new state object when nothing changed.
 - Split UI into small **widget classes**, never helper methods returning `Widget` (`_buildHeader()`): classes can be `const` and rebuild independently.
+  Each such class gets its own file in `pages/widgets/` (section 9).
 - `const` constructors everywhere possible (`prefer_const_constructors` and friends from very_good_analysis stay on).
 - Subscribe to precise inherited data: `MediaQuery.sizeOf(context)`, `MediaQuery.paddingOf(context)`, not `MediaQuery.of(context)`.
 - High-frequency transient state (drag offset, scroll position, animation progress, text field draft) stays local in the widget
@@ -884,6 +897,11 @@ Accessibility:
 - Full-area `GestureDetector` left in the semantics tree over items that have their own nodes.
 - Status or result text that changes without `liveRegion`; fixed heights around text; ignoring disabled animations.
 - A page without the guideline and large-text tests.
+
+Structure:
+- A page file with more than the page widget (private `_Widget` classes, several widgets in one file).
+- A widget file with more than one public widget.
+- A page building its own `Scaffold` / `SafeArea` instead of `AppPageLayout`.
 
 UI performance:
 - One `BlocBuilder` around a whole page; helper methods returning widgets instead of widget classes.

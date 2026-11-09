@@ -75,7 +75,8 @@ lib/
     storage/                     KeyValueStorage + SharedPreferences
     exceptions/  usecases/       AppException, UseCase, NoParams
     l10n/  navigation/           строки (ARB), пути и имена экранов
-    theme/  widgets/             токены дизайна, тема, AppButton
+    theme/  widgets/             токены дизайна, тема, AppButton, AppPageLayout
+                                 (общий каркас страниц: Scaffold + AppBar + SafeArea)
   features/
     shared/game_results/         общие бизнес-понятия фич (shared kernel, не фича):
                                  Difficulty, GameOutcome, GameResult, LevelStats,
