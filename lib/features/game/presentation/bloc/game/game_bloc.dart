@@ -89,7 +89,9 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     final current = state;
     if (current is! GameInProgress || !current.aiThinking) return;
     try {
-      final delay = Future<void>.delayed(_aiMoveDelay.duration);
+      final delay = Future<void>.delayed(
+        _aiMoveDelay.after(current.game.lastMove),
+      );
       final move = await _computeAiMove(
         ComputeAiMoveParams(
           game: current.game,

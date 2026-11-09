@@ -109,14 +109,17 @@ void main() {
     history: history,
   );
 
-  GameBloc build({Duration delay = Duration.zero}) => GameBloc(
+  GameBloc build({
+    Duration delay = Duration.zero,
+    Duration perStep = Duration.zero,
+  }) => GameBloc(
     startNewGame,
     selectSquare,
     makeMove,
     computeAiMove,
     saveGameResult,
     trackEvent,
-    AiMoveDelay(delay),
+    AiMoveDelay(pause: delay, perStep: perStep),
   );
 
   void stubSelect(MoveSelection from, Position at, MoveSelection to) => when(
@@ -480,6 +483,34 @@ void main() {
       seed: () => computerTurn(afterHuman),
       act: (bloc) => bloc.add(const AiMoveRequested()),
       wait: const Duration(milliseconds: 100),
+      expect: () => [humanTurn(afterAi)],
+    );
+
+    blocTest<GameBloc, GameState>(
+      'reply waits for the animation of the human move',
+      setUp: () {
+        stubAi(afterHuman, aiMove);
+        stubMove(afterHuman, aiMove, afterAi);
+      },
+      // afterHuman.lastMove crosses one square: 200 ms of animation.
+      build: () => build(perStep: const Duration(milliseconds: 200)),
+      seed: () => computerTurn(afterHuman),
+      act: (bloc) => bloc.add(const AiMoveRequested()),
+      wait: const Duration(milliseconds: 100),
+      expect: () => <GameState>[],
+      verify: (_) => verifyZeroInteractions(makeMove),
+    );
+
+    blocTest<GameBloc, GameState>(
+      'reply comes once the human move animation is over',
+      setUp: () {
+        stubAi(afterHuman, aiMove);
+        stubMove(afterHuman, aiMove, afterAi);
+      },
+      build: () => build(perStep: const Duration(milliseconds: 50)),
+      seed: () => computerTurn(afterHuman),
+      act: (bloc) => bloc.add(const AiMoveRequested()),
+      wait: const Duration(milliseconds: 150),
       expect: () => [humanTurn(afterAi)],
     );
 

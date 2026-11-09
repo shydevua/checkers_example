@@ -4,6 +4,7 @@ import 'package:checkers_app/core/analytics/track_event.dart';
 import 'package:checkers_app/features/game/domain/game_domain.dart';
 import 'package:checkers_app/features/game/presentation/bloc/game/ai_move_delay.dart';
 import 'package:checkers_app/features/game/presentation/bloc/game/game_bloc.dart';
+import 'package:checkers_app/features/game/presentation/pages/widgets/board_view.dart';
 import 'package:checkers_app/features/shared/game_results/game_result_recorder.dart';
 import 'package:injectable/injectable.dart';
 
@@ -16,8 +17,12 @@ abstract class GameModule {
   @lazySingleton
   AiEngine get aiEngine => const AiEngine();
 
+  /// The reply waits for the human's move animation on the board.
   @lazySingleton
-  AiMoveDelay get aiMoveDelay => const AiMoveDelay(Duration(milliseconds: 450));
+  AiMoveDelay get aiMoveDelay => const AiMoveDelay(
+    pause: Duration(milliseconds: 200),
+    perStep: BoardView.stepDuration,
+  );
 
   @lazySingleton
   StartNewGame startNewGame(CheckersRules rules) => StartNewGame(rules);
