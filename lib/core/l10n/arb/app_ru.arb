@@ -1,0 +1,115 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Шашки",
+  "chooseLevel": "Выберите уровень",
+  "difficulty": "{level, select, easy{Лёгкий} medium{Средний} hard{Сложный} other{{level}}}",
+  "@difficulty": {
+    "description": "Name of a computer level",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "level": "Уровень: {name}",
+  "@level": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "statistics": "Статистика",
+  "wins": "Победы",
+  "losses": "Поражения",
+  "draws": "Ничьи",
+  "gamesPlayed": "{count, plural, =0{Партий нет} one{{count} партия} few{{count} партии} many{{count} партий} other{{count} партии}}",
+  "@gamesPlayed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "resetStatistics": "Сбросить статистику",
+  "yourTurn": "Ваш ход",
+  "aiThinking": "Компьютер думает…",
+  "mustCapture": "Бить обязательно",
+  "computerMoved": "Компьютер: {move}",
+  "@computerMoved": {
+    "description": "Announced after the computer's move, move in checkers notation",
+    "placeholders": {
+      "move": {
+        "type": "String"
+      }
+    }
+  },
+  "outcome": "{outcome, select, win{Вы победили!} loss{Вы проиграли} draw{Ничья} other{{outcome}}}",
+  "@outcome": {
+    "placeholders": {
+      "outcome": {
+        "type": "String"
+      }
+    }
+  },
+  "playAgain": "Играть снова",
+  "backToMenu": "В меню",
+  "retry": "Повторить",
+  "undoMove": "Отменить ход",
+  "illegalMove": "Недопустимый ход",
+  "gameAlreadyOver": "Партия уже завершена",
+  "invalidPosition": "Неверная клетка",
+  "statsStorageFailed": "Не удалось прочитать или сохранить статистику",
+  "statsCorrupted": "Статистика повреждена",
+  "boardLabel": "Доска, вы играете {color}",
+  "@boardLabel": {
+    "placeholders": {
+      "color": {
+        "type": "String"
+      }
+    }
+  },
+  "colorName": "{color, select, white{белыми} black{чёрными} other{{color}}}",
+  "@colorName": {
+    "placeholders": {
+      "color": {
+        "type": "String"
+      }
+    }
+  },
+  "piece": "{piece, select, whiteMan{белая шашка} blackMan{чёрная шашка} whiteKing{белая дамка} blackKing{чёрная дамка} other{пусто}}",
+  "@piece": {
+    "description": "What stands on a square, for screen readers",
+    "placeholders": {
+      "piece": {
+        "type": "String"
+      }
+    }
+  },
+  "squareLabel": "{square}, {content}",
+  "@squareLabel": {
+    "placeholders": {
+      "square": {
+        "type": "String"
+      },
+      "content": {
+        "type": "String"
+      }
+    }
+  },
+  "squareSelected": "выбрана",
+  "squareCanMove": "можно ходить",
+  "squareTarget": "можно пойти сюда",
+  "squareLastMove": "последний ход",
+  "selectPieceHint": "выбрать шашку",
+  "moveHereHint": "пойти сюда",
+  "chooseSide": "Ваш цвет",
+  "sideLabel": "{color, select, white{Белые} black{Чёрные} other{{color}}}",
+  "@sideLabel": {
+    "placeholders": {
+      "color": {
+        "type": "String"
+      }
+    }
+  }
+}

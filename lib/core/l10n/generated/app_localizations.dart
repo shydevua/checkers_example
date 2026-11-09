@@ -1,0 +1,350 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations_en.dart';
+import 'app_localizations_ru.dart';
+
+// ignore_for_file: type=lint
+
+/// Callers can lookup localized strings with an instance of AppLocalizations
+/// returned by `AppLocalizations.of(context)`.
+///
+/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
+///
+/// ```dart
+/// import 'generated/app_localizations.dart';
+///
+/// return MaterialApp(
+///   localizationsDelegates: AppLocalizations.localizationsDelegates,
+///   supportedLocales: AppLocalizations.supportedLocales,
+///   home: MyApplicationHome(),
+/// );
+/// ```
+///
+/// ## Update pubspec.yaml
+///
+/// Please make sure to update your pubspec.yaml to include the following
+/// packages:
+///
+/// ```yaml
+/// dependencies:
+///   # Internationalization support.
+///   flutter_localizations:
+///     sdk: flutter
+///   intl: any # Use the pinned version from flutter_localizations
+///
+///   # Rest of dependencies
+/// ```
+///
+/// ## iOS Applications
+///
+/// iOS applications define key application metadata, including supported
+/// locales, in an Info.plist file that is built into the application bundle.
+/// To configure the locales supported by your app, you’ll need to edit this
+/// file.
+///
+/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
+/// Then, in the Project Navigator, open the Info.plist file under the Runner
+/// project’s Runner folder.
+///
+/// Next, select the Information Property List item, select Add Item from the
+/// Editor menu, then select Localizations from the pop-up menu.
+///
+/// Select and expand the newly-created Localizations item then, for each
+/// locale your application supports, add a new item and select the locale
+/// you wish to add from the pop-up menu in the Value field. This list should
+/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// property.
+abstract class AppLocalizations {
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+
+  final String localeName;
+
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
+  }
+
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
+
+  /// A list of this localizations delegate along with the default localizations
+  /// delegates.
+  ///
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
+  /// and GlobalWidgetsLocalizations.delegate.
+  ///
+  /// Additional delegates can be added by appending to this list in
+  /// MaterialApp. This list does not have to be used at all if a custom list
+  /// of delegates is preferred or required.
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
+
+  /// A list of this localizations delegate's supported locales.
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('ru'),
+    Locale('en'),
+  ];
+
+  /// No description provided for @appTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Шашки'**
+  String get appTitle;
+
+  /// No description provided for @chooseLevel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите уровень'**
+  String get chooseLevel;
+
+  /// Name of a computer level
+  ///
+  /// In ru, this message translates to:
+  /// **'{level, select, easy{Лёгкий} medium{Средний} hard{Сложный} other{{level}}}'**
+  String difficulty(String level);
+
+  /// No description provided for @level.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уровень: {name}'**
+  String level(String name);
+
+  /// No description provided for @statistics.
+  ///
+  /// In ru, this message translates to:
+  /// **'Статистика'**
+  String get statistics;
+
+  /// No description provided for @wins.
+  ///
+  /// In ru, this message translates to:
+  /// **'Победы'**
+  String get wins;
+
+  /// No description provided for @losses.
+  ///
+  /// In ru, this message translates to:
+  /// **'Поражения'**
+  String get losses;
+
+  /// No description provided for @draws.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ничьи'**
+  String get draws;
+
+  /// No description provided for @gamesPlayed.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, =0{Партий нет} one{{count} партия} few{{count} партии} many{{count} партий} other{{count} партии}}'**
+  String gamesPlayed(int count);
+
+  /// No description provided for @resetStatistics.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сбросить статистику'**
+  String get resetStatistics;
+
+  /// No description provided for @yourTurn.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ваш ход'**
+  String get yourTurn;
+
+  /// No description provided for @aiThinking.
+  ///
+  /// In ru, this message translates to:
+  /// **'Компьютер думает…'**
+  String get aiThinking;
+
+  /// No description provided for @mustCapture.
+  ///
+  /// In ru, this message translates to:
+  /// **'Бить обязательно'**
+  String get mustCapture;
+
+  /// Announced after the computer's move, move in checkers notation
+  ///
+  /// In ru, this message translates to:
+  /// **'Компьютер: {move}'**
+  String computerMoved(String move);
+
+  /// No description provided for @outcome.
+  ///
+  /// In ru, this message translates to:
+  /// **'{outcome, select, win{Вы победили!} loss{Вы проиграли} draw{Ничья} other{{outcome}}}'**
+  String outcome(String outcome);
+
+  /// No description provided for @playAgain.
+  ///
+  /// In ru, this message translates to:
+  /// **'Играть снова'**
+  String get playAgain;
+
+  /// No description provided for @backToMenu.
+  ///
+  /// In ru, this message translates to:
+  /// **'В меню'**
+  String get backToMenu;
+
+  /// No description provided for @retry.
+  ///
+  /// In ru, this message translates to:
+  /// **'Повторить'**
+  String get retry;
+
+  /// No description provided for @undoMove.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отменить ход'**
+  String get undoMove;
+
+  /// No description provided for @illegalMove.
+  ///
+  /// In ru, this message translates to:
+  /// **'Недопустимый ход'**
+  String get illegalMove;
+
+  /// No description provided for @gameAlreadyOver.
+  ///
+  /// In ru, this message translates to:
+  /// **'Партия уже завершена'**
+  String get gameAlreadyOver;
+
+  /// No description provided for @invalidPosition.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверная клетка'**
+  String get invalidPosition;
+
+  /// No description provided for @statsStorageFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось прочитать или сохранить статистику'**
+  String get statsStorageFailed;
+
+  /// No description provided for @statsCorrupted.
+  ///
+  /// In ru, this message translates to:
+  /// **'Статистика повреждена'**
+  String get statsCorrupted;
+
+  /// No description provided for @boardLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доска, вы играете {color}'**
+  String boardLabel(String color);
+
+  /// No description provided for @colorName.
+  ///
+  /// In ru, this message translates to:
+  /// **'{color, select, white{белыми} black{чёрными} other{{color}}}'**
+  String colorName(String color);
+
+  /// What stands on a square, for screen readers
+  ///
+  /// In ru, this message translates to:
+  /// **'{piece, select, whiteMan{белая шашка} blackMan{чёрная шашка} whiteKing{белая дамка} blackKing{чёрная дамка} other{пусто}}'**
+  String piece(String piece);
+
+  /// No description provided for @squareLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'{square}, {content}'**
+  String squareLabel(String square, String content);
+
+  /// No description provided for @squareSelected.
+  ///
+  /// In ru, this message translates to:
+  /// **'выбрана'**
+  String get squareSelected;
+
+  /// No description provided for @squareCanMove.
+  ///
+  /// In ru, this message translates to:
+  /// **'можно ходить'**
+  String get squareCanMove;
+
+  /// No description provided for @squareTarget.
+  ///
+  /// In ru, this message translates to:
+  /// **'можно пойти сюда'**
+  String get squareTarget;
+
+  /// No description provided for @squareLastMove.
+  ///
+  /// In ru, this message translates to:
+  /// **'последний ход'**
+  String get squareLastMove;
+
+  /// No description provided for @selectPieceHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'выбрать шашку'**
+  String get selectPieceHint;
+
+  /// No description provided for @moveHereHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'пойти сюда'**
+  String get moveHereHint;
+
+  /// No description provided for @chooseSide.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ваш цвет'**
+  String get chooseSide;
+
+  /// No description provided for @sideLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'{color, select, white{Белые} black{Чёрные} other{{color}}}'**
+  String sideLabel(String color);
+}
+
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
+  const _AppLocalizationsDelegate();
+
+  @override
+  Future<AppLocalizations> load(Locale locale) {
+    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
+  }
+
+  @override
+  bool isSupported(Locale locale) =>
+      <String>['en', 'ru'].contains(locale.languageCode);
+
+  @override
+  bool shouldReload(_AppLocalizationsDelegate old) => false;
+}
+
+AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when only language code is specified.
+  switch (locale.languageCode) {
+    case 'en':
+      return AppLocalizationsEn();
+    case 'ru':
+      return AppLocalizationsRu();
+  }
+
+  throw FlutterError(
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
+}
