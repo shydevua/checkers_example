@@ -1,26 +1,28 @@
-# Скилы проекта
+# Project skills
 
-Инструкции для ИИ-ассистента (Claude Code), по которым написан и меняется
-этот проект.
+Instructions for the AI assistant (Claude Code) that this project was built
+and is maintained with.
 
-| Скил | О чём |
+| Skill | What it covers |
 |---|---|
-| [`flutter-clean-feature-first`](flutter-clean-feature-first/SKILL.md) | Feature-first Clean Architecture: слои, bloc, DI, типизированные ошибки, производительность UI, доступность (раздел 10A), тесты и мутационное тестирование |
+| [`flutter-clean-feature-first`](flutter-clean-feature-first/SKILL.md) | Feature-first Clean Architecture: layers, bloc, DI, typed errors, UI performance, accessibility (section 10A), testing and mutation testing |
 
-Чтобы Claude Code подхватывал скил автоматически, положите папку скила в
-`.claude/skills/` (в проекте) или в `~/.claude/skills/` (для всех проектов).
+To have Claude Code pick a skill up automatically, put its folder into
+`.claude/skills/` (per project) or `~/.claude/skills/` (for all projects).
 
-## Где проект сознательно отходит от скила
+## Where this project deliberately departs from the skill
 
-Скил описывает строгую схему из нескольких пакетов. В этом проекте по
-решению автора:
+The skill describes a strict multi-package layout. By the author's decision
+this project uses:
 
-- **один Flutter-пакет** вместо pub workspace; границы слоёв проверяет
-  `test/architecture_test.dart`, а не pubspec;
-- **`core/` разбит по темам** (`analytics`, `storage`, `l10n`…), без слоёв
-  domain/data/ui внутри;
-- **общие бизнес-понятия фич** — в `lib/features/shared/`, а не в `core`;
-- **все регистрации DI** — в `lib/app/di/modules/`, классы фич без
-  аннотаций `injectable`;
-- **одна точка входа** `lib/main.dart`, окружение через `--dart-define=ENV`;
-- **строки** — `flutter gen-l10n` (ARB).
+- **a single Flutter package** instead of a pub workspace; layer boundaries
+  are checked by `test/architecture_test.dart`, not by pubspecs;
+- **`core/` split by topic** (`analytics`, `storage`, `l10n`, …), without
+  domain/data/ui layers inside;
+- **business concepts shared by features** in `lib/features/shared/`, not in
+  `core`;
+- **all DI registrations** in `lib/app/di/modules/`; feature classes carry no
+  `injectable` annotations;
+- **a single entry point** `lib/main.dart`, the environment via
+  `--dart-define=ENV`;
+- **strings** with `flutter gen-l10n` (ARB).
