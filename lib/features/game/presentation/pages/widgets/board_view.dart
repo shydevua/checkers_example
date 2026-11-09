@@ -3,7 +3,7 @@ import 'package:checkers_app/core/theme/app_colors.dart';
 import 'package:checkers_app/core/theme/app_durations.dart';
 import 'package:checkers_app/core/theme/app_spacing.dart';
 import 'package:checkers_app/features/game/domain/game_domain.dart';
-import 'package:checkers_app/features/game/presentation/widgets/board_painter.dart';
+import 'package:checkers_app/features/game/presentation/pages/widgets/board_painter.dart';
 import 'package:flutter/material.dart';
 
 /// Square board that reports taps as [Position]s and animates every new

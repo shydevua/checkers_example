@@ -12,7 +12,7 @@ import 'package:checkers_app/app/app.dart';
 import 'package:checkers_app/app/di/injection.dart';
 import 'package:checkers_app/core/analytics/analytics.dart';
 import 'package:checkers_app/core/l10n/l10n.dart';
-import 'package:checkers_app/features/game/presentation/widgets/board_view.dart';
+import 'package:checkers_app/features/game/presentation/pages/widgets/board_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:injectable/injectable.dart' show Environment;

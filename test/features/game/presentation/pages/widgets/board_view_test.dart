@@ -1,6 +1,6 @@
 import 'package:checkers_app/core/l10n/l10n.dart';
 import 'package:checkers_app/features/game/domain/game_domain.dart';
-import 'package:checkers_app/features/game/presentation/widgets/board_view.dart';
+import 'package:checkers_app/features/game/presentation/pages/widgets/board_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
